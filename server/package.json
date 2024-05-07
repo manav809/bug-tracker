@@ -24,7 +24,9 @@
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.0",
     "@types/express-list-endpoints": "^6.0.3",
+    "dotenv": "^16.4.5",
     "mongoose": "^8.3.4"
   }
 }
