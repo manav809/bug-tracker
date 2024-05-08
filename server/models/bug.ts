@@ -16,4 +16,4 @@ bugSchema.set('toJSON', {
 })
 
 const Bug = mongoose.model('Bug', bugSchema)
-module.exports = Bug
+export default Bug

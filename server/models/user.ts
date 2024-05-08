@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   role: { type: String, required: true },
-  stories: { type: mongoose.Schema.Types.ObjectId, ref: 'Bug' }
+  stories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bug' } ] 
 })
 
 userSchema.set('toJSON', {

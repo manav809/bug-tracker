@@ -3,6 +3,7 @@ import express from "express"
 import cors from "cors"
 import mongoose, { Error } from "mongoose"
 import userRouter from "./controllers/user"
+import bugRouter from "./controllers/bug"
 import dotenv from "dotenv"
 dotenv.config()
 
@@ -21,5 +22,6 @@ app.use(express.static("dist"))
 app.use(express.json())
 
 app.use("/api/user", userRouter)
+app.use("/api/bug", bugRouter)
 
 export default app
