@@ -27,10 +27,12 @@
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.0",
     "@types/express-list-endpoints": "^6.0.3",
+    "@types/morgan": "^1.9.9",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-list-endpoints": "^7.1.0",
-    "mongoose": "^8.3.4"
+    "mongoose": "^8.3.4",
+    "morgan": "^1.10.0"
   }
 }

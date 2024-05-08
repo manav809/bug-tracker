@@ -5,6 +5,7 @@ import mongoose, { Error } from "mongoose"
 import userRouter from "./controllers/user"
 import bugRouter from "./controllers/bug"
 import dotenv from "dotenv"
+import morgan from 'morgan'
 dotenv.config()
 
 const app = express()
@@ -20,6 +21,7 @@ mongoose
 app.use(cors())
 app.use(express.static("dist"))
 app.use(express.json())
+app.use(morgan('tiny'));
 
 app.use("/api/user", userRouter)
 app.use("/api/bug", bugRouter)
