@@ -13,9 +13,15 @@ bugRouter.get("/", async (req, res) => {
 
 bugRouter.post("/", async (req, res) => {
   const body = req.body;
+  if (!req.user.id) {
+    return res.status(401).json({ error: "Token Not Present" });
+  } else if (body.assignee != req.user.id) {
+    return res.status(401).json({ error: "Token Mismatch" });
+  }
   if (!("story_points" in body)) {
     body.story_points = 3;
   }
+
   const user = await User.findById(body.assignee);
 
   const bug = new Bug({
@@ -27,12 +33,11 @@ bugRouter.post("/", async (req, res) => {
 
   bug.save().then((result) => {
     if (user && user.stories) {
-      user.stories = user.stories.concat(result.id)
-      user.save()
+      user.stories = user.stories.concat(result.id);
+      user.save();
     }
-    res.status(201).json(result)
-  })
-
+    res.status(201).json(result);
+  });
 });
 
-export default bugRouter
+export default bugRouter;
