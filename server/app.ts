@@ -6,6 +6,7 @@ import userRouter from "./controllers/user"
 import bugRouter from "./controllers/bug"
 import dotenv from "dotenv"
 import morgan from 'morgan'
+import loginRouter from "./controllers/login"
 dotenv.config()
 
 const app = express()
@@ -25,5 +26,6 @@ app.use(morgan('tiny'));
 
 app.use("/api/user", userRouter)
 app.use("/api/bug", bugRouter)
+app.use("/api/login", loginRouter)
 
 export default app
