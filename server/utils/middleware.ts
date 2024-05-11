@@ -24,4 +24,25 @@ const userExtractor = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export default userExtractor
+const errorHandler = (
+  error: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (error.name === "CastError") {
+    return res.status(404).send({ error: "malformmated id" });
+  } else if (error.name === "ValidationError") {
+    return res.status(404).send({ error: error.message });
+  } else if (
+    error.name === "MongoServerError" &&
+    error.message.includes("E11000 duplicate key error")
+  ) {
+    return res.status(404).send({ error: "Email already Exists" });
+  } else if (error.name === "JsonWebTokenError") {
+    return res.status(404).send({ error: "JWT Incorrect or Expired" });
+  }
+  next(error);
+};
+
+export default { userExtractor, errorHandler };
