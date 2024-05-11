@@ -40,7 +40,9 @@ const errorHandler = (
   ) {
     return res.status(404).send({ error: "Email already Exists" });
   } else if (error.name === "JsonWebTokenError") {
-    return res.status(404).send({ error: "JWT Incorrect or Expired" });
+    return res.status(404).send({ error: "JWT Incorrect" });
+  } else if (error.name === "TokenExpiredError") {
+    return res.status(404).send({error: "Token Expired"})
   }
   next(error);
 };
