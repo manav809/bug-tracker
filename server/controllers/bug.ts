@@ -1,6 +1,7 @@
 import Bug from "../models/bug";
 import User from "../models/user";
 import { Router } from "express";
+
 const bugRouter: Router = Router();
 
 bugRouter.get("/", async (req, res) => {

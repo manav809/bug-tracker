@@ -1,14 +1,25 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState, useEffect } from "react";
 import "./App.css";
 import LoginForm from "./components/Login";
+import bugService from "./services/bug";
+import Bug from "./components/Bug";
 
 function App() {
+  const [bugs, setBugs] = useState([]);
+
+  useEffect(() => {
+    bugService.getAll().then((bugs) => setBugs(bugs));
+  }, []);
+
   return (
     <>
       <h1>Bug Tracking Monitor</h1>
       <LoginForm />
+      <ul>
+        {bugs.map((bug) => {
+          <Bug key={bug.id} bug={bug} />;
+        })}
+      </ul>
     </>
   );
 }
