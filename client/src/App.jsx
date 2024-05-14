@@ -6,20 +6,33 @@ import Bug from "./components/Bug";
 
 function App() {
   const [bugs, setBugs] = useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     bugService.getAll().then((bugs) => setBugs(bugs));
   }, []);
 
+  useEffect(() => {
+    const loggedInUser = window.localStorage.getItem("logged_user");
+    if (loggedInUser) {
+      const user = JSON.parse(loggedInUser);
+      setUser(user);
+      bugService.setToken(user.token);
+    }
+  }, []);
+  
   return (
     <>
       <h1>Bug Tracking Monitor</h1>
-      <LoginForm />
-      <ul>
-        {bugs.map((bug) => {
-          return <Bug key={bug.id} bug={bug} />;
-        })}
-      </ul>
+      {!user ? (
+        <LoginForm />
+      ) : (
+        <ul>
+          {bugs.map((bug) => {
+            return <Bug key={bug.id} bug={bug} />;
+          })}
+        </ul>
+      )}
     </>
   );
 }
