@@ -3,7 +3,7 @@ const Bug = ({ bug }) => {
     <>
       <li>
         Title: {bug.title} Description: {bug.description} Assignee:{" "}
-        {bug.assignee} Story Points: {bug.story_points}
+        {bug.assignee.name} Story Points: {bug.story_points}
       </li>
     </>
   );

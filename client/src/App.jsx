@@ -17,7 +17,7 @@ function App() {
       <LoginForm />
       <ul>
         {bugs.map((bug) => {
-          <Bug key={bug.id} bug={bug} />;
+          return <Bug key={bug.id} bug={bug} />;
         })}
       </ul>
     </>
