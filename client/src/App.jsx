@@ -3,6 +3,7 @@ import "./App.css";
 import LoginForm from "./components/Login";
 import bugService from "./services/bug";
 import Bug from "./components/Bug";
+import CreateForm from "./components/Create";
 
 function App() {
   const [bugs, setBugs] = useState([]);
@@ -20,18 +21,21 @@ function App() {
       bugService.setToken(user.token);
     }
   }, []);
-  
+
   return (
     <>
       <h1>Bug Tracking Monitor</h1>
       {user === null ? (
-        <LoginForm setUser={setUser}/>
+        <LoginForm setUser={setUser} />
       ) : (
-        <ul>
-          {bugs.map((bug) => {
-            return <Bug key={bug.id} bug={bug} />;
-          })}
-        </ul>
+        <>
+          <CreateForm />
+          <ul>
+            {bugs.map((bug) => {
+              return <Bug key={bug.id} bug={bug} />;
+            })}
+          </ul>
+        </>
       )}
     </>
   );
