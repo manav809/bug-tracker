@@ -1,15 +1,33 @@
 import { useState } from "react";
+import bugService from "../services/bug";
 
-const CreateForm = () => {
+const CreateForm = ({ bugs, setBugs }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [assignee, setAssignee] = useState("");
   const [points, setPoints] = useState("");
 
+  const createBug = (event) => {
+    event.preventDefault();
+    const newBug = {
+      title,
+      description,
+      assignee,
+      points,
+    };
+    bugService.create(newBug).then((newBug) => {
+      setBugs(bugs.concat(newBug));
+      setTitle("");
+      setDescription("");
+      setAssignee("");
+      setPoints("");
+    });
+  };
+
   return (
     <>
       <h3>Create Ticket</h3>
-      <form onSubmit={() => console.log("Hello World")}>
+      <form onSubmit={createBug}>
         <div>
           <input
             type="title"

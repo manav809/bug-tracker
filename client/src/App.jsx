@@ -4,6 +4,7 @@ import LoginForm from "./components/Login";
 import bugService from "./services/bug";
 import Bug from "./components/Bug";
 import CreateForm from "./components/Create";
+import axios from "axios";
 
 function App() {
   const [bugs, setBugs] = useState([]);
@@ -22,6 +23,13 @@ function App() {
     }
   }, []);
 
+  const handleLogout = async () => {
+    setUser(null);
+    window.localStorage.clear();
+    localStorage.removeItem("logged_user");
+    axios.defaults.headers.common["Authorization"] = null;
+  };
+
   return (
     <>
       <h1>Bug Tracking Monitor</h1>
@@ -29,7 +37,8 @@ function App() {
         <LoginForm setUser={setUser} />
       ) : (
         <>
-          <CreateForm />
+          <CreateForm bugs={bugs} setBugs={setBugs} />
+          <button onClick={handleLogout}>logout</button>
           <ul>
             {bugs.map((bug) => {
               return <Bug key={bug.id} bug={bug} />;

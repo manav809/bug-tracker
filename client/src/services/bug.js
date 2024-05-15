@@ -13,7 +13,11 @@ const getAll = () => {
 };
 
 const create = (newObject) => {
-  const request = axios.post(baseUrl, newObject);
+  const config = {
+    headers: { Authorization: token },
+  };
+  
+  const request = axios.post(baseUrl, newObject, config);
   return request.then((response) => response.data);
 };
 
