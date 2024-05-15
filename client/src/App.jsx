@@ -24,8 +24,8 @@ function App() {
   return (
     <>
       <h1>Bug Tracking Monitor</h1>
-      {!user ? (
-        <LoginForm />
+      {user === null ? (
+        <LoginForm setUser={setUser}/>
       ) : (
         <ul>
           {bugs.map((bug) => {

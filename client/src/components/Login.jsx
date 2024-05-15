@@ -2,7 +2,7 @@ import { useState } from "react";
 import loginService from "../services/login";
 import bugService from "../services/bug";
 
-const LoginForm = (props) => {
+const LoginForm = ({setUser}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,6 +15,7 @@ const LoginForm = (props) => {
       });
       console.log(user)
       window.localStorage.setItem("logged_user", JSON.stringify(user));
+      setUser(user)
       bugService.setToken(user.token);
       setEmail("");
       setPassword("");
