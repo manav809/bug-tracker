@@ -45,7 +45,7 @@ function App() {
         <></>
       )}
       {user === null ? (
-        <LoginForm setUser={setUser} setAlertColor={setAlertColor} />
+        <LoginForm setUser={setUser} setAlertColor={setAlertColor} setNotification={setNotification} />
       ) : (
         <>
           <CreateForm

@@ -2,7 +2,7 @@ import { useState } from "react";
 import loginService from "../services/login";
 import bugService from "../services/bug";
 
-const LoginForm = ({setUser}) => {
+const LoginForm = ({setUser, setAlertColor, setNotification}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,7 +19,15 @@ const LoginForm = ({setUser}) => {
       bugService.setToken(user.token);
       setEmail("");
       setPassword("");
+      
+      setAlertColor("added");
+      setNotification(`${user.email} Successfully Logged In!!!`);
+      setTimeout(() => {
+        setNotification(null);
+      }, 5000);
     } catch (exception) {
+      setAlertColor("deleted");
+      setNotification("Check Username and/or Password!!!");
       console.log(exception);
     }
   };
