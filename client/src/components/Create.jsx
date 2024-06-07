@@ -1,7 +1,7 @@
 import { useState } from "react";
 import bugService from "../services/bug";
 
-const CreateForm = ({ bugs, setBugs }) => {
+const CreateForm = ({ bugs, setAlertColor, setBugs, setNotification }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [assignee, setAssignee] = useState("");
@@ -17,6 +17,18 @@ const CreateForm = ({ bugs, setBugs }) => {
     };
     bugService.create(newBug).then((newBug) => {
       setBugs(bugs.concat(newBug));
+      setAlertColor("added");
+      setNotification(`Added ${title} for ${assignee}`);
+      setTimeout(() => {
+        setNotification(null);
+      }, 3000);
+    }).catch(() => {
+      setAlertColor("deleted");
+      setNotification("Check Fields");
+      setTimeout(() => {
+        setNotification(null);
+      }, 5000);
+    }).finally(() => {
       setTitle("");
       setDescription("");
       setAssignee("");

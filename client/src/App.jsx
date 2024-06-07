@@ -5,10 +5,13 @@ import bugService from "./services/bug";
 import Bug from "./components/Bug";
 import CreateForm from "./components/Create";
 import axios from "axios";
+import Notification from "./components/Notification";
 
 function App() {
   const [bugs, setBugs] = useState([]);
   const [user, setUser] = useState(null);
+  const [alertColor, setAlertColor] = useState("");
+  const [notification, setNotification] = useState("");
 
   useEffect(() => {
     bugService.getAll().then((bugs) => setBugs(bugs));
@@ -33,11 +36,24 @@ function App() {
   return (
     <>
       <h1>Bug Tracking Monitor</h1>
+      {notification ? (
+        <Notification
+          notification={notification}
+          alertColor={alertColor}
+        />
+      ) : (
+        <></>
+      )}
       {user === null ? (
-        <LoginForm setUser={setUser} />
+        <LoginForm setUser={setUser} setAlertColor={setAlertColor} />
       ) : (
         <>
-          <CreateForm bugs={bugs} setBugs={setBugs} />
+          <CreateForm
+            bugs={bugs}
+            setBugs={setBugs}
+            setNotification={setNotification}
+            setAlertColor={setAlertColor}
+          />
           <button onClick={handleLogout}>logout</button>
           <ul>
             {bugs.map((bug) => {
