@@ -1,11 +1,9 @@
-const Notification = () => {
-    return (
-        <div>
-            <h3>
-                Notification Bar
-            </h3>
-        </div>
-    )
-}
+const Notification = ({ notification, alertColor }) => {
+  return (
+    <div className={alertColor === "added" ? "added" : "deleted"}>
+      <h3>{notification}</h3>
+    </div>
+  );
+};
 
 export default Notification;
